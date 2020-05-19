@@ -4,7 +4,8 @@ import pyglet
 
 class GameOfLife:
 
-    def __init__(self, window_width, window_height, cell_size, percent_fill):
+    def __init__(self, window_width, window_height, cell_size, percent_fill)
+        print('constructing gameOfLife')
         self.grid_width = int(window_width / cell_size)
         self.grid_height = int(window_height / cell_size)
         self.cell_size = cell_size
@@ -13,6 +14,7 @@ class GameOfLife:
         self.generate_cells()
 
     def generate_cells(self):
+        print('generate_cells')
         for row in range(0, self.grid_height):
             self.cells.append([])
             for col in range(0, self.grid_width):
@@ -22,9 +24,11 @@ class GameOfLife:
                     self.cells[row].append(0)
 
     def draw(self):
+        print('generate_cells')
         for row in range(0, self.grid_height):
             for col in range(0, self.grid_width):
                 if self.cells[row][col] == 1:
+                    # get the pixel coordinates for the corners of the box
                     # (0, 0), (0, 20), (20, 0), (20, 20)
                     square_coords = (row * self.cell_size,                  col * self.cell_size,
                                      row * self.cell_size,                  col * self.cell_size + self.cell_size,
@@ -69,4 +73,5 @@ class GameOfLife:
         return 0
 
     def create_cell(self, x, y):
+        print('create_cell')
         self.cells[x // self.cell_size][y // self.cell_size] = 1
