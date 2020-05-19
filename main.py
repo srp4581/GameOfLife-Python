@@ -1,4 +1,6 @@
 import pyglet
+from pyglet.window import mouse
+
 from game_of_life import GameOfLife
 
 
@@ -22,4 +24,14 @@ class Window(pyglet.window.Window):
 
 if __name__ == '__main__':
     window = Window()
+
+
+    @window.event
+    def on_mouse_press(x, y, button, modifiers):
+        if button == mouse.LEFT:
+            print('x= ', window.gameOfLife.grid_height)
+            print('y= ', window.gameOfLife.grid_width)
+            print('coordinate', x, ', ', y)
+            window.gameOfLife.create_cell(x, y)
+
     pyglet.app.run()

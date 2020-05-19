@@ -63,8 +63,10 @@ class GameOfLife:
 
         self.cells = temp
 
-
     def get_cell_value(self, row, col):
         if 0 <= row < self.grid_height and 0 <= col < self.grid_width:
             return self.cells[row][col]
         return 0
+
+    def create_cell(self, x, y):
+        self.cells[x // self.cell_size][y // self.cell_size] = 1
