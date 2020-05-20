@@ -1,0 +1,24 @@
+5/20/2020
+ADDING COLOR TO THE RANDOMLY GENERATED PIXELS
+
+    draw_indexed() is a way to draw primitives in an indexed order.
+    In this case the primitive is GL_TRIANGLES.
+    The GL_TRIANGLES object requires at least one piece of information:
+    the coordinates of the primitive's vertices.
+
+    The vertex information is based on 2 things: v2i, v meaning vertext information,
+    and 2 for the number of components per vertex (meaning 2D space).
+    The data supplied is of type i (integer).
+
+    Optionally, you can supply color information to the GL_TRIANGLES object.
+    This instructs the rendering process what color each corner should be mapped
+    against. There is a similar definition: c3B, where c is for color, 3 means
+    3 items per data blob (RGB in this case), and the data is of type B (unsigned int).
+    The color is tied to each vertex specified earlier in v2i, so if you have 4
+    vertex coordinates, you'll need 4 color pairs.
+
+    You need to multiply your color definition, which is randomly generated for each cell
+    using random.randint(), by as many times as you have corners. Your color definition
+    will look like (255, 255, 255). You can find the number of corners with
+    int(len(square_coords)/2). The /2 is because there are 2 pairs per corner in
+    square_coords, but you only want to count the amount of corners, not positions.

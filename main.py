@@ -12,16 +12,20 @@ class Window(pyglet.window.Window):
         self.gameOfLife = GameOfLife(self.get_size()[0],
                                      self.get_size()[1],
                                      10,
-                                     0.5)
-        pyglet.clock.schedule_interval(self.update, 1.0/10.0)
+                                     0.3)
+        self.running_life = False
+        pyglet.clock.schedule_interval(self.update, 1.0/24.0)
 
     def on_draw(self):
         print('on_draw')
-        self.clear()
-        self.gameOfLife.draw()
+        # self.clear()
+        if self.running_life:
+            self.gameOfLife.draw()
+        else:
+            pass
 
     def update(self, dt):
-        # pass
+        print('update')
         self.gameOfLife.run_rules()
 
 
@@ -40,8 +44,10 @@ if __name__ == '__main__':
     def on_key_press(symbol, modifiers):
         print('on_key_press')
         if symbol == key.SPACE:
-            print('Space was pressed')
-            window.gameOfLife.draw()
+            if window.running_life:
+                window.running_life = False
+            else:
+                window.running_life = True
 
 
     pyglet.app.run()
