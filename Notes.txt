@@ -22,3 +22,26 @@ ADDING COLOR TO THE RANDOMLY GENERATED PIXELS
     will look like (255, 255, 255). You can find the number of corners with
     int(len(square_coords)/2). The /2 is because there are 2 pairs per corner in
     square_coords, but you only want to count the amount of corners, not positions.
+
+5/21/2020
+ADDING CELLS MANUALLY
+
+    def create_cell(self, x, y):
+        row = x // self.cell_size
+        col = y // self.cell_size
+        self.cells[row][col] = 1
+        square_coords = (row * self.cell_size, col * self.cell_size,
+                         row * self.cell_size, col * self.cell_size + self.cell_size,
+                         row * self.cell_size + self.cell_size, col * self.cell_size,
+                         row * self.cell_size + self.cell_size, col * self.cell_size + self.cell_size)
+
+        pyglet.graphics.draw_indexed(4, pyglet.gl.GL_TRIANGLES,
+                                     [0, 1, 2, 1, 2, 3],
+                                     ('v2i', square_coords)
+
+ 6/7/2020
+ THE EVENT LOOP
+
+    ondraw() redraws the window after any event that occurs
+    pyglet.app.run() enters the default event loop, and allows pyglet to respond to app events such as the
+        mouse and keyboard

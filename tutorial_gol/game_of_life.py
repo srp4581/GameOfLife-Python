@@ -5,7 +5,6 @@ import pyglet
 class GameOfLife:
 
     def __init__(self, window_width, window_height, cell_size, percent_fill):
-        print('constructing gameOfLife')
         self.grid_width = int(window_width / cell_size)
         self.grid_height = int(window_height / cell_size)
         self.cell_size = cell_size
@@ -14,17 +13,15 @@ class GameOfLife:
         self.generate_cells()
 
     def generate_cells(self):
-        print('generate_cells')
         for row in range(0, self.grid_height):
             self.cells.append([])
             for col in range(0, self.grid_width):
-                if random.random() < self.percent_fill:
-                    self.cells[row].append(1)
-                else:
+                if random.random() <= self.percent_fill:
                     self.cells[row].append(0)
+                else:
+                    self.cells[row].append(1)
 
     def draw(self):
-        print('draw')
         for row in range(0, self.grid_height):
             for col in range(0, self.grid_width):
                 if self.cells[row][col] == 1:
@@ -42,7 +39,6 @@ class GameOfLife:
                                                  ('v2i', square_coords))
 
     def run_rules(self):
-        print('run_rules')
         # if you apply the rules to a cell in the original grid, it will mess with the cells that come after
         # use a copy
         temp = []
@@ -75,17 +71,3 @@ class GameOfLife:
         if 0 <= row < self.grid_height and 0 <= col < self.grid_width:
             return self.cells[row][col]
         return 0
-
-    def create_cell(self, x, y):
-        print('create_cell')
-        row = x // self.cell_size
-        col = y // self.cell_size
-        self.cells[row][col] = 1
-        square_coords = (row * self.cell_size, col * self.cell_size,
-                         row * self.cell_size, col * self.cell_size + self.cell_size,
-                         row * self.cell_size + self.cell_size, col * self.cell_size,
-                         row * self.cell_size + self.cell_size, col * self.cell_size + self.cell_size)
-
-        pyglet.graphics.draw_indexed(4, pyglet.gl.GL_TRIANGLES,
-                                     [0, 1, 2, 1, 2, 3],
-                                     ('v2i', square_coords))
